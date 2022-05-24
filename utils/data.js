@@ -4,7 +4,7 @@ const data = {
    name: "Leather Sandals",
    slug: "leather-sandals",
    category: "sandals",
-   images: ["/images/1a.jpeg", "/images/1b.webp"],
+   images: ["/images/1a.jpg", "/images/1b.webp"],
    price: 90,
    brand: "",
    qtyInStock: 20,

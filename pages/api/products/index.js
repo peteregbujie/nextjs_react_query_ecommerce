@@ -8,7 +8,7 @@ const handler = nc();
 
 handler.get(async (req, res) => {
  const products = await Product.find({});
- res.send(products);
+ res.status(200).json(products);
 });
 
 export default handler;

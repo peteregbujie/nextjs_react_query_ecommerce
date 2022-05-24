@@ -1,7 +1,26 @@
-import React from "react";
+import { dehydrate, QueryClient } from "react-query";
+import Layout from "../components/Layout";
+import Products from "../components/Products";
+import { fetchProducts } from "../utils/rqHooks";
 
-function index() {
- return <div>index</div>;
+export default function Home() {
+ return (
+  <Layout>
+   <Products />
+  </Layout>
+ );
 }
 
-export default index;
+export async function getServerSideProps() {
+ const queryClient = new QueryClient();
+
+ // Use the prefetchQuery method to prefetch the results of a query to be placed into the cache
+ await queryClient.prefetchQuery("products", fetchProducts);
+
+ // Pass data to the page via props
+ return {
+  props: {
+   dehydratedState: dehydrate(queryClient),
+  },
+ };
+}
