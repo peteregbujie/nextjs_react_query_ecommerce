@@ -10,7 +10,7 @@ export default function Layout({ children }) {
    </Head>
    <Navbar />
    <main className="flex flex-row">
-    <section className="w-[1024px]">{children}</section>
+    <section className="w-screen">{children}</section>
    </main>
   </>
  );

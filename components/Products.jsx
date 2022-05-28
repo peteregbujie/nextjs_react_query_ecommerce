@@ -4,6 +4,7 @@ import useFetchProducts from "../utils/rqHooks";
 
 export const Products = () => {
  const { data: products } = useFetchProducts();
+
  return (
   <>
    {products && (
@@ -12,20 +13,20 @@ export const Products = () => {
       <h2 className="sr-only">Products</h2>
 
       <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-       {products.map((product) => (
+       {Array.from(products).map((product) => (
         <Link
-         href={`/product/${product.id}`}
+         href={`/product/${product.slug}`}
          key={product.name}
          className="group"
         >
          <div>
-          <div className="w-full overflow-hidden bg-gray-200 rounded-lg aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8">
+          <div className="w-full h-[250px] overflow-hidden bg-gray-200 rounded-lg aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8">
            <Image
             src={product.images[0]}
             alt={product.slug}
-            className="object-cover object-center w-full h-full group-hover:opacity-75"
-            height="400px"
-            width="400px"
+            layout="fill"
+            objectFit="cover"
+            className="group-hover:opacity-75"
            />
           </div>
           <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>

@@ -1,14 +1,9 @@
 import { dehydrate, QueryClient } from "react-query";
-import Layout from "../components/Layout";
 import Products from "../components/Products";
 import { fetchProducts } from "../utils/rqHooks";
 
 export default function Home() {
- return (
-  <Layout>
-   <Products />
-  </Layout>
- );
+ return <Products />;
 }
 
 export async function getServerSideProps() {

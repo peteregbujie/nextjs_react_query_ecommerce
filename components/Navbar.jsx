@@ -3,12 +3,8 @@ import { useState } from "react";
 
 const links = [
  {
-  href: "/index",
+  href: "/",
   text: "Home",
- },
- {
-  href: "/products",
-  text: "Products",
  },
 ];
 
@@ -25,7 +21,7 @@ const Navbar = () => {
     <Link href="/">
      <a className="inline-flex items-center p-2 mr-4 ">
       <span className="text-xl font-bold tracking-wide text-white uppercase">
-       Home
+       Shoe Store
       </span>
      </a>
     </Link>
