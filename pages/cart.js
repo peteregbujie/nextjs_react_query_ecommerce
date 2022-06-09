@@ -1,21 +1,45 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import axios from "axios";
 import CartItem from "components/cart/CartItem";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../components/cart/context/CartContext";
+import getStripe from "../utils/get-stripe";
 import { useMounted } from "../utils/useMounted";
 
 function Cart() {
  const { hasMounted } = useMounted();
- const { state, dispatch } = useContext(CartContext);
-
  const router = useRouter();
 
+ const { state, dispatch } = useContext(CartContext);
  const {
   cart: { cartItems },
   itemCount,
   total,
  } = state;
+
+ const AllCartItems = hasMounted ? cartItems : "";
+
+ const [redirecting] = useState(false);
+
+ const redirectToCheckout = async () => {
+  // Create Stripe checkout
+  const {
+   data: { id },
+  } = await axios.post("/api/checkout_sessions", {
+   items: AllCartItems.map(({ name, price, quantity, images }) => ({
+    name,
+    amount: price * 100,
+    quantity,
+    images: [images[0]],
+    currency: "USD",
+   })),
+  });
+
+  // Redirect to checkout
+  const stripe = await getStripe();
+  await stripe.redirectToCheckout({ sessionId: id });
+ };
 
  /* This react app uses hydration technique to render a DOM that is already been built, with all our components rendered as HTML. 
  So, using data (cartItems etc) stored in the browser cookie will cause hydration issues because items stored in the browser are 
@@ -24,14 +48,8 @@ React expects that the rendered content is identical between the server and the 
 Use the useMount() hook to make the pre-rendered content and the content in the client the same.
 The solution is to display the cartItems after the first render and start with no items initially*/
 
- const AllCartItems = hasMounted ? cartItems : "";
-
  const clearCartHandler = () => {
   dispatch({ type: "CLEAR_CART" });
- };
- const checkoutHandler = (e) => {
-  e.preventDefault();
-  router.push("/checkout");
  };
 
  const shoppingHandler = (e) => {
@@ -63,7 +81,7 @@ The solution is to display the cartItems after the first render and start with n
           Quantity
          </h3>
          <h3 className="w-1/5 text-xs font-semibold text-center text-gray-600 uppercase">
-          Price
+          Unit Price
          </h3>
          <h3 className="w-1/5 text-xs font-semibold text-center text-gray-600 uppercase">
           Total
@@ -95,11 +113,8 @@ The solution is to display the cartItems after the first render and start with n
        <div id="summary" className="w-1/4 px-8 py-10">
         <h1 className="pb-8 text-2xl font-semibold border-b">Order Summary</h1>
         <div className="flex justify-between mt-10 mb-5">
-         <span className="text-sm font-semibold uppercase">
-          Total Quantity{}
-          {itemCount}
-         </span>
-         <span className="text-sm font-semibold">{}</span>
+         <span className="text-sm font-semibold uppercase">Total Quantity</span>
+         <span className="text-sm font-semibold">{itemCount}</span>
         </div>
 
         <button
@@ -114,10 +129,11 @@ The solution is to display the cartItems after the first render and start with n
           <span>${total}</span>
          </div>
          <button
-          onClick={checkoutHandler}
-          className="w-full py-3 text-sm font-semibold text-white uppercase bg-indigo-500 hover:bg-indigo-600"
+          onClick={redirectToCheckout}
+          disabled={redirecting}
+          className="px-6 py-2 mt-4 text-white transition-colors bg-indigo-600 border border-indigo-600 rounded hover:bg-rose-600 hover:border-rose-600 focus:ring-4 focus:ring-opacity-50 focus:ring-rose-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-rose-500 max-w-max"
          >
-          Checkout
+          {redirecting ? "Redirecting..." : "Go to Checkout"}
          </button>
         </div>
        </div>
