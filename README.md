@@ -1,34 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+\*\*NExtJS Ecommerce APP
+Online store built with NextJs, MongoDB database, TailwindCSS for styling, React Query for data fetching, and Stripe checkout to complete order.
 
-## Getting Started
+React Query lets you fetch any number of queries you want during any of the Next.js pre-rendering steps and then dehydrate those queries. This allows you to pre-render your markup that will be available with all the data on page load and once the page renders on the client, React Query will hydrate those dehydrated queries with the full functionality of the library.
 
-First, run the development server:
+\**Features
+*Seed products into MongoDB database
+*Create endpoint to fetch products from the server.
+*Fetch list of products
+*Fetch single product from react query cache . This reduces the amount of fetch requests.
+*Create a global State using React context and useReducer hook.
+*Add Items to cart. Items added to cart are stored in global state using the browser cookie.
+*Use stripe Checkout to complete checkout.
 
-```bash
+Getting Started
+
+1. Clone the repository and install dependencies
+   git clone https://github.com/peteregbujie/nextjs_react_query_ecommerce
+   cd nextjs_react_query_ecommerce
+   npm install
+2. Configure your local environment
+   Rename the .env.example file in this directory to .env (which will be ignored by Git):
+
+Add your own values for all the environment variables.
+
+3. Start the application
+   To run your site locally, use:
+
 npm run dev
-# or
-yarn dev
-```
+To run it in production mode, use:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+npm run build
+npm run start
