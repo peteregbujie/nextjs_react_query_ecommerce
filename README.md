@@ -1,6 +1,10 @@
-<video src='/public/video/screenshot.mp4' width=180/>
+
+
+
+https://user-images.githubusercontent.com/14050333/173025204-cf1d950c-6dda-427c-90a1-3fafd1cc0c6f.mp4
 
 <b>NextJS Ecommerce App</b>
+
 <br>
 
 <p>Online store built with NextJs, MongoDB, TailwindCSS for styling, React Query for data fetching, and Stripe checkout to complete order.</p>
