@@ -63,6 +63,20 @@ The solution is to display the cartItems after the first render and start with n
     <div className="container mt-10 ml-10">
      <h1 className="text-2xl font-semibold">Shopping Cart</h1>
      <h4 className="container mx-auto mt-10">Cart is empty</h4>
+
+     <a
+      href="#"
+      className="flex mt-10 text-sm font-semibold text-indigo-600"
+      onClick={shoppingHandler}
+     >
+      <svg
+       className="w-4 mr-2 text-indigo-600 fill-current"
+       viewBox="0 0 448 512"
+      >
+       <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
+      </svg>
+      Continue Shopping
+     </a>
     </div>
    ) : (
     <div className="bg-gray-100">
@@ -89,7 +103,7 @@ The solution is to display the cartItems after the first render and start with n
         </div>
 
         <ul role="list" className="-my-6 divide-y divide-gray-200">
-         {Array.from(AllCartItems).map((product) => (
+         {AllCartItems.map((product) => (
           <CartItem key={product._id} product={product} />
          ))}
         </ul>
@@ -100,7 +114,6 @@ The solution is to display the cartItems after the first render and start with n
          onClick={shoppingHandler}
         >
          <svg
-          onClick={shoppingHandler}
           className="w-4 mr-2 text-indigo-600 fill-current"
           viewBox="0 0 448 512"
          >

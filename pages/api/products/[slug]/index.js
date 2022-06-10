@@ -8,7 +8,6 @@ connectDB();
 
 handler.get(async (req, res) => {
  const product = await Product.findOne({ slug: req.query.slug });
- console.log(product);
  res.send(product);
 });
 

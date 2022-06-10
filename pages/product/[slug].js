@@ -1,12 +1,36 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { FetchProductDetails } from "../../utils/rqHooks";
+import { useContext } from "react";
+import { CartContext } from "../../components/cart/context/CartContext";
+import { useFetchProductDetails } from "../../utils/rqHooks";
+import { useMounted } from "../../utils/useMounted";
 
 export default function Product() {
  const router = useRouter();
  const { slug } = router.query;
 
- const { data: product } = FetchProductDetails(slug);
+ const { data: product } = useFetchProductDetails(slug);
+ const { hasMounted } = useMounted();
+ const { state, dispatch } = useContext(CartContext);
+
+ const {
+  cart: { cartItems },
+ } = state;
+
+ const AllCartItems = hasMounted ? cartItems : "";
+
+ const addToCartHandler = () => {
+  const productExistsInCart = AllCartItems.find(
+   (item) => item._id === product._id
+  );
+  const quantity = productExistsInCart ? productExistsInCart.quantity + 1 : 1;
+  if (product.qtyInStock < quantity) {
+   window.alert("product is out of Stock");
+   return;
+  }
+  dispatch({ type: "CART_ADD_PRODUCT", payload: { ...product, quantity } });
+  router.push("/cart");
+ };
 
  return (
   <>
@@ -55,7 +79,7 @@ export default function Product() {
        </div>
       </div>
 
-      {/* Product info */}
+      {/* product info */}
       <div className="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
        <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
         <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
@@ -65,17 +89,19 @@ export default function Product() {
 
        {/* Options */}
        <div className="mt-4 lg:mt-0 lg:row-span-3">
-        <h2 className="sr-only">Product information</h2>
+        <h2 className="sr-only">product information</h2>
         <p className="text-3xl text-gray-900">${product.price}</p>
 
-        <form className="mt-10">
+        <div className="mt-10">
          <button
+          disabled={product.qtyInStock < 0}
+          onClick={addToCartHandler}
           type="submit"
           className="flex items-center justify-center w-full px-8 py-3 mt-10 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
          >
-          Add to bag
+          Add to Cart
          </button>
-        </form>
+        </div>
        </div>
 
        <div className="py-10 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">

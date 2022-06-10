@@ -46,9 +46,7 @@ function Banner() {
       <Image
        src={banner1}
        alt="banner1"
-       width="640px"
-       height="896px"
-       objectFit="cover"
+       layout="fill"
        className="absolute inset-0 object-cover w-full h-full"
       />
      </div>
@@ -57,9 +55,7 @@ function Banner() {
       <Image
        src={banner2}
        alt="banner2"
-       width="640px"
-       height="896px"
-       objectFit="cover"
+       layout="fill"
        className="absolute inset-0 object-cover w-full h-full"
       />
      </div>

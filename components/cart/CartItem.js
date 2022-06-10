@@ -2,7 +2,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { FetchProductDetails } from "../../utils/rqHooks";
+import { useFetchProductDetails } from "../../utils/rqHooks";
 import { CartContext } from "./context/CartContext";
 
 function CartItem({ product }) {
@@ -10,7 +10,7 @@ function CartItem({ product }) {
  const { dispatch } = useContext(CartContext);
  const inStock = [...Array(product.qtyInStock).keys()];
 
- const { data: productDB } = FetchProductDetails(product.slug);
+ const { data: productDB } = useFetchProductDetails(product.slug);
 
  const changeCartQtyHandler = (product, selected) => {
   if (productDB?.qtyInStock < selected) {
@@ -112,7 +112,7 @@ function CartItem({ product }) {
     </div>
 
     <span className="w-1/5 text-sm font-semibold text-center">
-     {product.price}
+     ${product.price}
     </span>
     <span className="w-1/5 text-sm font-semibold text-center">
      ${product.quantity * product.price}

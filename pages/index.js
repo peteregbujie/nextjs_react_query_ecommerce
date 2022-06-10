@@ -1,9 +1,13 @@
 import { dehydrate, QueryClient } from "react-query";
-import Products from "../components/Products";
+import Banner from "../components/Banner";
 import { fetchProducts } from "../utils/rqHooks";
 
 export default function Home() {
- return <Products />;
+ return (
+  <>
+   <Banner />
+  </>
+ );
 }
 
 export async function getServerSideProps() {
