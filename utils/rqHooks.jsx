@@ -30,7 +30,7 @@ export const useFetchProductDetails = (slug) => {
  });
 };
 
-const fetchProducts = async () => {
+export const fetchProducts = async () => {
  const { data } = await client.get("/api/products");
  return data;
 };
