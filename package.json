@@ -19,7 +19,6 @@
     "js-cookie": "^3.0.1",
     "mongodb": "^4.6.0",
     "mongoose": "^6.3.4",
-    "multer": "^1.4.4",
     "next": "12.1.6",
     "next-connect": "^0.12.2",
     "prop-types": "^15.8.1",
