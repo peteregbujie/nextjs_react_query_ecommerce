@@ -4,13 +4,6 @@ import { useContext } from "react";
 import { useMounted } from "../utils/useMounted";
 import { CartContext } from "./cart/context/CartContext";
 
-// const links = [
-//  {
-//   href: "/",
-//   text: "Home",
-//  },
-// ];
-
 const Navbar = () => {
  const { hasMounted } = useMounted();
 
