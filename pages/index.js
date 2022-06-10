@@ -1,6 +1,6 @@
 import { dehydrate, QueryClient } from "react-query";
 import Banner from "../components/Banner";
-import { useFetchProducts } from "../utils/rqHooks";
+import useFetchProducts from "../utils/rqHooks";
 
 export default function Home() {
  return (
