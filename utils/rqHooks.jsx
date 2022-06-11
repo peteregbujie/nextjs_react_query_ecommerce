@@ -3,13 +3,9 @@
 import axios from "axios";
 import { useQuery, useQueryClient } from "react-query";
 
-const client = axios.create({
- baseURL: "http://localhost:3000/",
-});
-
 //fetch checkout session with session id
 const fetchCheckOut = async (session_id) => {
- const { data } = await client.get(`/api/checkout_sessions/${session_id}`);
+ const { data } = await axios.get(`/api/checkout_sessions/${session_id}`);
  return data;
 };
 
@@ -19,7 +15,7 @@ export const useFetchCheckOutDetails = (session_id) => {
 };
 
 const fetchProduct = async (slug) => {
- const { data } = await client.get(`/api/products/${slug}`);
+ const { data } = await axios.get(`/api/products/${slug}`);
  return data;
 };
 
@@ -31,7 +27,7 @@ export const useFetchProductDetails = (slug) => {
 };
 
 export const fetchProducts = async () => {
- const { data } = await client.get("/api/products");
+ const { data } = await axios.get("/api/products");
  return data;
 };
 
