@@ -81,18 +81,17 @@ The solution is to display the cartItems after the first render and start with n
    ) : (
     <div className="bg-gray-100">
      <div className="container mx-auto my-auto mt-10">
-      <div className="flex my-10 shadow-md">
-       <div className="w-3/4 px-10 py-10 bg-white">
+      <div className="flex my-10">
+       <div className="w-4/6 px-4 py-10 bg-white lg:w-3/4">
         <div className="flex justify-between pb-8 border-b">
          <h1 className="text-2xl font-semibold">Shopping Cart</h1>
-         <h2 className="text-2xl font-semibold">{}</h2>
         </div>
         <div className="flex mt-10 mb-5">
          <h3 className="w-2/5 text-xs font-semibold text-gray-600 uppercase">
           Product Details
          </h3>
          <h3 className="w-1/5 text-xs font-semibold text-center text-gray-600 uppercase">
-          Quantity
+          Qty
          </h3>
          <h3 className="w-1/5 text-xs font-semibold text-center text-gray-600 uppercase">
           Unit Price
@@ -123,7 +122,7 @@ The solution is to display the cartItems after the first render and start with n
         </a>
        </div>
 
-       <div id="summary" className="w-1/4 px-8 py-10">
+       <div id="summary" className="w-2/6 px-8 py-10 lg:w-1/4">
         <h1 className="pb-8 text-2xl font-semibold border-b">Order Summary</h1>
         <div className="flex justify-between mt-10 mb-5">
          <span className="text-sm font-semibold uppercase">Total Quantity</span>
