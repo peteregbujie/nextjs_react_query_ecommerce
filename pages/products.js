@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import useFetchProducts from "../utils/rqHooks";
+import { dehydrate, QueryClient } from "react-query";
+import useFetchProducts, { fetchProducts } from "../utils/rqHooks";
 
 export const Products = () => {
- const { data: products } = useFetchProducts();
+ const { data: products, isLoading } = useFetchProducts();
+ console.log(isLoading);
 
  return (
   <>
@@ -45,3 +47,16 @@ export const Products = () => {
 };
 
 export default Products;
+
+export async function getServerSideProps() {
+ const queryClient = new QueryClient();
+
+ // Use the prefetchQuery method to prefetch the results of a query to be placed into the cache
+ await queryClient.prefetchQuery("products", fetchProducts);
+
+ return {
+  props: {
+   dehydratedState: dehydrate(queryClient),
+  },
+ };
+}
